@@ -1,7 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using App.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 
@@ -30,21 +33,23 @@ namespace App.Endpoints
             }
         }
 
-        public async Task<string> CalculateBenefits()
+        public async Task<string> CalculateBenefits(EmployeeDependents employeeBenefits)
         {
-            using (var client = new HttpClient())
-            {
-                var uri = new Uri("https://localhost:7001/api/Benefits");
-                //HTTP GET
-                var responseTask = client.PostAsync(uri);
-                responseTask.Wait();
+           
+            
 
-                var result = responseTask.Result;
+            using (var client = new HttpClient())            {
+
+                var uri = new Uri("https://localhost:7001/api/Benefits");
+
+                var content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json");
+                var result = client.PostAsync(uri, content).Result;                
+
                 if (result.IsSuccessStatusCode)
                 {
                     var rawString = result.Content.ReadAsStringAsync().Result;
-                    var hereItIs = JsonConvert.DeserializeObject<List<string>>(rawString);
-                    return hereItIs[0] + hereItIs[1];
+                    var hereItIs = JsonConvert.DeserializeObject<string>(rawString);
+                    return hereItIs;
                 }
 
                 return "fail";

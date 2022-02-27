@@ -170,7 +170,7 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Endpoints\Endpoint.cs" />
-    <Compile Include="Endpoints\IEndpoint.cs" />
+    <Compile Include="Endpoints\Interfaces\IEndpoint.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

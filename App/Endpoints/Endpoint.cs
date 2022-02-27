@@ -1,9 +1,9 @@
-﻿using App.Models;
+﻿using App.Endpoints.Interfaces;
+using App.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,26 +33,68 @@ namespace App.Endpoints
             }
         }
 
-        public async Task<string> CalculateBenefits(EmployeeDependents employeeBenefits)
+        public async Task<string> SubmitToApiWithID()
         {
-           
-            
+            using (var client = new HttpClient())
+            {
+                var uri = new Uri("https://localhost:7001/api/Tests/{1}");
+                //HTTP GET
+                var responseTask = client.GetAsync(uri);
+                responseTask.Wait();
 
-            using (var client = new HttpClient())            {
-
-                var uri = new Uri("https://localhost:7001/api/Benefits");
-
-                var content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json");
-                var result = client.PostAsync(uri, content).Result;                
-
+                var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
                     var rawString = result.Content.ReadAsStringAsync().Result;
-                    var hereItIs = JsonConvert.DeserializeObject<string>(rawString);
-                    return hereItIs;
+                    var hereItIs = JsonConvert.DeserializeObject<List<string>>(rawString);
+                    return hereItIs[0] + hereItIs[1];
                 }
 
                 return "fail";
+            }
+        }
+
+        public async Task<string> CalculateBenefits(EmployeeDependents employeeBenefits)
+        {
+            try
+            {
+                var uri = new Uri("https://localhost:7001/api/Benefits/Calculate");
+
+                //var content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json");
+                //var result = client.PostAsync(uri, content).Result;
+
+                using (var client = new HttpClient())
+                {
+                    var content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json");
+                    var result = client.PostAsync(uri, content).Result;
+
+                    //var request = new HttpRequestMessage
+                    //{
+                    //    Method = HttpMethod.Get,
+                    //    RequestUri = uri,
+                    //    Content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json"),
+                    //};
+
+                    //var response = client.SendAsync(request).Result;
+
+                    //var content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json");
+
+                    //var result = client.GetAsync(uri).Result;  
+
+
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var rawString = result.Content.ReadAsStringAsync().Result;
+                        var hereItIs = JsonConvert.DeserializeObject<string>(rawString);
+                        return hereItIs;
+                    }
+
+                    return "fail";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
 

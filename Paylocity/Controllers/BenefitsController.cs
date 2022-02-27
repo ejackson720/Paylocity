@@ -4,9 +4,14 @@ using Paylocity.Models;
 
 namespace Paylocity.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     public class BenefitsController : Controller
     {
-        [HttpGet]
+        [Route("Calculate")]
+        [HttpPost]
+        [HttpGet("{employee}")]
         public string Calculate(EmployeeDependents employee)
         {
             return "We are here";

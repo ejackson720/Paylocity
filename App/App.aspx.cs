@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Script.Serialization;
 using App.Endpoints;
+using App.Models;
 
 namespace App
 {
@@ -16,13 +17,23 @@ namespace App
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            EmployeeDependents employeeDependents = new EmployeeDependents();
             //Get the Employee Name
+            employeeDependents.EmployeeName = txtEmployeeName.Text;
+
 
             //Get the Dependent Names
             string[] dependentNames = Request.Form.GetValues("DynamicTextBox");
+            if (dependentNames != null && dependentNames.Length > 0)
+            {
+                foreach (var dependent in dependentNames)
+                {
+                    employeeDependents.Dependents.Add(dependent);
+                }
+            }          
 
             //Call the endpoint with allthese things
-            var result =  _endpoint.SubmitToApi().Result;
+            var result =  _endpoint.CalculateBenefits(employeeDependents).Result;
             lblResult.Text = result;
         }
         protected void Post(object sender, EventArgs e)

@@ -6,5 +6,11 @@ namespace App.Models
     {
         public string EmployeeName { get; set; }
         public List<string> Dependents { get; set; }
+
+        public EmployeeDependents()
+        {
+            Dependents = new List<string>(); ;
+        }
+
     }
 }

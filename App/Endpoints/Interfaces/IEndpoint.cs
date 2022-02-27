@@ -1,7 +1,7 @@
 ﻿using App.Models;
 using System.Threading.Tasks;
 
-namespace App.Endpoints
+namespace App.Endpoints.Interfaces
 {
     public interface IEndpoint
     {

@@ -1,9 +1,8 @@
 ﻿namespace Paylocity.Models
 {
     public class EmployeeDependentsResponse
-    {
-        public Person Employee { get; set; }
-        public List<Person> Dependents { get; set; }
+    {        
+        public List<Person> People { get; set; }
         public bool HasError { get; set; }
 
         public EmployeeDependentsResponse()

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Paylocity.Handlers.Interfaces;
 using Paylocity.Models;
 
@@ -11,10 +10,12 @@ namespace Paylocity.Controllers
     public class BenefitsController : Controller
     {
         private IDataHandler _dataHandler;
+        private IHTMLHandler _hTMLHandler;
 
-        public BenefitsController(IDataHandler dataHandler)
+        public BenefitsController(IDataHandler dataHandler, IHTMLHandler hTMLHandler)
         {
             _dataHandler = dataHandler;
+            _hTMLHandler = hTMLHandler;
         }
 
         [Route("Calculate")]
@@ -23,16 +24,16 @@ namespace Paylocity.Controllers
         public string Calculate(EmployeeDependentsRequest employee)
         {
             //Get the response
-            var responseObject = _dataHandler.ProcessEmployeeDependentsRequest(employee);
-            responseObject.HasError = true;
+            var responseObject = _dataHandler.ProcessEmployeeDependentsRequest(employee);         
 
             if(responseObject.HasError)
             {
                 return "Error processing this request. <br> If you feel you made a mistake, please reenter the information. <br> Otherwise please contact the IT department";
             }
 
-            //
-            return "We are here";
+            //Get the HTML
+            var html = _hTMLHandler.GetHTML(responseObject);
+            return html;
         }
     }
 }

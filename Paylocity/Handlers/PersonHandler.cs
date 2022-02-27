@@ -22,11 +22,38 @@ namespace Paylocity.Handlers
             {
                 Name = name,
                 Cost = _rulesHandler.GetCostAnnual(name, isDependent),
-                IsDiscounted = _rulesHandler.IsDiscounted(name)                
+                IsDiscounted = _rulesHandler.IsDiscounted(name)  ,
+                IsEmployee = !isDependent
             };           
            
 
             return person;
+        }
+
+        public Person GetEmployee(EmployeeDependentsResponse response)
+        {
+            if (response == null )
+            {
+                return null;
+            }
+
+            var employee  = response.People.Where(x => x.IsEmployee == true).FirstOrDefault();
+
+            return employee;
+        }
+
+        public int GetNumberPeopleDiscounted(EmployeeDependentsResponse response)
+        {
+            return response.People.Where(x=>x.IsDiscounted == true).ToList().Count();
+        }
+        public int GetNumberOfDependents(EmployeeDependentsResponse response)
+        {
+            return response.People.Where(x => x.IsEmployee = false).ToList().Count();
+        }
+
+        public decimal GetAnnualCost(EmployeeDependentsResponse response)
+        {
+
         }
     }
 }

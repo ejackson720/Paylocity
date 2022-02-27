@@ -25,8 +25,8 @@ namespace Paylocity.Handlers
 
             EmployeeDependentsResponse response = new();
 
-            //Create a person for the original employee
-            response.Employee = _personHandler.GetPerson(request.EmployeeName, false);
+            //Create a person for the employee
+            response.Dependents.Add(_personHandler.GetPerson(request.EmployeeName, false));
 
             //Create a person for each dependent
             foreach(var dependent in request.Dependents)

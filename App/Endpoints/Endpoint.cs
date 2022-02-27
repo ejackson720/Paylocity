@@ -67,19 +67,7 @@ namespace App.Endpoints
                 {
                     var content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json");
                     var result = client.PostAsync(uri, content).Result;
-
-                    //var request = new HttpRequestMessage
-                    //{
-                    //    Method = HttpMethod.Get,
-                    //    RequestUri = uri,
-                    //    Content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json"),
-                    //};
-
-                    //var response = client.SendAsync(request).Result;
-
-                    //var content = new StringContent(JsonConvert.SerializeObject(employeeBenefits), Encoding.UTF8, "application/json");
-
-                    //var result = client.GetAsync(uri).Result;  
+                                     
 
 
                     if (result.IsSuccessStatusCode)

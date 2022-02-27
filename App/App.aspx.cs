@@ -34,7 +34,7 @@ namespace App
 
             //Call the endpoint with allthese things
             var result =  _endpoint.CalculateBenefits(employeeDependents).Result;
-            lblResult.Text = result;
+            lblResults.Text = result;
         }
         protected void Post(object sender, EventArgs e)
         {

@@ -24,15 +24,6 @@ namespace App
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// txtEmployeeName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmployeeName;
-
-        /// <summary>
         /// lblEmployeeName control.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,15 @@ namespace App
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEmployeeName;
+
+        /// <summary>
+        /// txtEmployeeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmployeeName;
 
         /// <summary>
         /// btnSubmit control.
@@ -51,12 +51,12 @@ namespace App
         protected global::System.Web.UI.WebControls.Button btnSubmit;
 
         /// <summary>
-        /// lblResult control.
+        /// lblResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResult;
+        protected global::System.Web.UI.WebControls.Label lblResults;
     }
 }

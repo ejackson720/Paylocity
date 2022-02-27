@@ -1,4 +1,11 @@
+using Paylocity;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+//Add Dependency Injection
+builder.Services.AddHandlers();
+
 
 // Add services to the container.
 

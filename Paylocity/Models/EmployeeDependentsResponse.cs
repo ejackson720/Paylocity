@@ -7,7 +7,7 @@
 
         public EmployeeDependentsResponse()
         {
-            Dependents = new List<Person>();
+            People = new List<Person>();
         }
     }
 }

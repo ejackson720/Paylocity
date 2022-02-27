@@ -51,9 +51,9 @@ namespace Paylocity.Handlers
             return response.People.Where(x => x.IsEmployee = false).ToList().Count();
         }
 
-        public decimal GetAnnualCost(EmployeeDependentsResponse response)
+        public double GetAnnualCost(EmployeeDependentsResponse response)
         {
-
+            return response.People.Select(x => x.Cost).Sum();
         }
     }
 }

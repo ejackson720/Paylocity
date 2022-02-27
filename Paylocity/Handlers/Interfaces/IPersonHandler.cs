@@ -8,6 +8,6 @@ namespace Paylocity.Handlers.Interfaces
         Person GetEmployee(EmployeeDependentsResponse response);
         int GetNumberPeopleDiscounted(EmployeeDependentsResponse response);
         int GetNumberOfDependents(EmployeeDependentsResponse response);
-        decimal GetAnnualCost(EmployeeDependentsResponse response);
+        double GetAnnualCost(EmployeeDependentsResponse response);
     }
 }

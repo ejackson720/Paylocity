@@ -26,12 +26,12 @@ namespace Paylocity.Handlers
             EmployeeDependentsResponse response = new();
 
             //Create a person for the employee
-            response.Dependents.Add(_personHandler.GetPerson(request.EmployeeName, false));
+            response.People.Add(_personHandler.GetPerson(request.EmployeeName, false));
 
             //Create a person for each dependent
             foreach(var dependent in request.Dependents)
             {
-                response.Dependents.Add(_personHandler.GetPerson(dependent, true));
+                response.People.Add(_personHandler.GetPerson(dependent, true));
             }
 
             return response;

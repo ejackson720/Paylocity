@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Paylocity", "Paylocity\Payl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{687BE9A5-CFB4-4028-BB58-B554033D70CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTests", "WebApiTests\WebApiTests.csproj", "{4010C160-4DE3-4D09-9544-D2B3A891974E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{687BE9A5-CFB4-4028-BB58-B554033D70CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{687BE9A5-CFB4-4028-BB58-B554033D70CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{687BE9A5-CFB4-4028-BB58-B554033D70CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4010C160-4DE3-4D09-9544-D2B3A891974E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4010C160-4DE3-4D09-9544-D2B3A891974E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4010C160-4DE3-4D09-9544-D2B3A891974E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4010C160-4DE3-4D09-9544-D2B3A891974E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,7 @@ namespace Paylocity.Handlers.Interfaces
     {
         Person GetPerson(string name, bool isDependent);
         Person GetEmployee(EmployeeDependentsResponse response);
-        int GetNumberPeopleDiscounted(EmployeeDependentsResponse response);
+        int GetNumberPeopleDiscounted(EmployeeDependentsResponse response); 
         int GetNumberOfDependents(EmployeeDependentsResponse response);
         double GetAnnualCost(EmployeeDependentsResponse response);
         string GetDependentNames(EmployeeDependentsResponse response);

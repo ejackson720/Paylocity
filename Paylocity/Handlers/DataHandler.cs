@@ -6,7 +6,7 @@ namespace Paylocity.Handlers
 {
     public class DataHandler : IDataHandler
     {
-        private IPersonHandler _personHandler;
+        private readonly IPersonHandler _personHandler;
 
         public DataHandler( IPersonHandler personHandler)
         {
@@ -26,12 +26,24 @@ namespace Paylocity.Handlers
             EmployeeDependentsResponse response = new();
 
             //Create a person for the employee
-            response.People.Add(_personHandler.GetPerson(request.EmployeeName, false));
+            var employeePerson= _personHandler.GetPerson(request.EmployeeName, false);
+            if(employeePerson.Name.Length == 0)
+            {
+                response.HasError = true;
+                return response;
+            }
+            response.People.Add(employeePerson);
 
             //Create a person for each dependent
             foreach(var dependent in request.Dependents)
             {
-                response.People.Add(_personHandler.GetPerson(dependent, true));
+                var dependentPerson = _personHandler.GetPerson(dependent, true);
+                if(dependentPerson.Name.Length == 0)
+                {
+                    response.HasError = true;
+                    return response;
+                }
+                response.People.Add(dependentPerson);
             }
 
             return response;

@@ -52,7 +52,7 @@ namespace Paylocity.Handlers
 
         public string GetPaycheckAfterDeductions(double annualDeductions)
         {
-            var paycheck = (PAYCHECK_TOTAL * NUM_OF_PAYCHECK - annualDeductions) / NUM_OF_PAYCHECK;
+            var paycheck = ((PAYCHECK_TOTAL * NUM_OF_PAYCHECK) - annualDeductions) / NUM_OF_PAYCHECK;
 
             return Math.Round(paycheck,2).ToString("N2");            
         }

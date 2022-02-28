@@ -15,7 +15,7 @@ namespace Paylocity.Handlers
         {
             if (name == null || name.Length == 0)
             {
-                return null;
+                throw new Exception("Invalid Name");
             }
 
             var person = new Person()
@@ -24,8 +24,7 @@ namespace Paylocity.Handlers
                 Cost = _rulesHandler.GetCostAnnual(name, isDependent),
                 IsDiscounted = _rulesHandler.IsDiscounted(name)  ,
                 IsEmployee = !isDependent
-            };           
-           
+            };                
 
             return person;
         }
@@ -34,11 +33,14 @@ namespace Paylocity.Handlers
         {
             if (response == null )
             {
-                return null;
+                throw new Exception("Invalid Response");
             }
 
             var employee  = response.People.Where(x => x.IsEmployee == true).FirstOrDefault();
-
+            if(employee == null)
+            {
+                throw new Exception("No Employee");
+            }
             return employee;
         }
 

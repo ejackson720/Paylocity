@@ -20,9 +20,9 @@ namespace Paylocity.Handlers
             StringBuilder stringBuilder = new StringBuilder();
          
             var employee = _personHandler.GetEmployee(response);
-            if(employee == null)
+            if(employee.Name.Length == 0)
             {
-                return "Could not find employee";
+                throw new Exception("Could not find employee");
             }
             stringBuilder.Append("<table>");
             stringBuilder.Append("<tr>");

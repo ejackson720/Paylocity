@@ -46,6 +46,11 @@ namespace Paylocity.Handlers
         {
             return response.People.Where(x=>x.IsDiscounted == true).ToList().Count();
         }
+
+        public int GetNumberDependentsDiscounted(EmployeeDependentsResponse response)
+        {
+            return response.People.Where(x => x.IsDiscounted == true && x.IsEmployee == false).ToList().Count();
+        }
         public int GetNumberOfDependents(EmployeeDependentsResponse response)
         {
             return response.People.Where(x => x.IsEmployee == false).ToList().Count();
@@ -54,6 +59,11 @@ namespace Paylocity.Handlers
         public double GetAnnualCost(EmployeeDependentsResponse response)
         {
             return response.People.Select(x => x.Cost).Sum();
+        }
+
+        public string GetDependentNames(EmployeeDependentsResponse response)
+        {
+            return String.Join(",",response.People.Select(x => x.Name));
         }
     }
 }

@@ -9,5 +9,6 @@ namespace Paylocity.Handlers.Interfaces
         int GetNumberPeopleDiscounted(EmployeeDependentsResponse response);
         int GetNumberOfDependents(EmployeeDependentsResponse response);
         double GetAnnualCost(EmployeeDependentsResponse response);
+        string GetDependentNames(EmployeeDependentsResponse response);
     }
 }

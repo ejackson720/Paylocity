@@ -18,15 +18,7 @@ namespace Paylocity.Handlers
         public string GetHTML(EmployeeDependentsResponse response)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            /*
-            Need to include
-            Employee Name
-            #Of Dependents
-            #Of 
-            
-
-             * */
-            //get the employee 
+         
             var employee = _personHandler.GetEmployee(response);
             if(employee == null)
             {
@@ -45,11 +37,11 @@ namespace Paylocity.Handlers
 
             stringBuilder.Append("<tr>");
             stringBuilder.Append($"<td>#Of Dependents</td>");
-            stringBuilder.Append($"<td>{_personHandler.GetNumberOfDependents(response)}</td>");
+            stringBuilder.Append($"<td>{_personHandler.GetNumberOfDependents(response)} :   {_personHandler.GetDependentNames(response)}</td>");
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");
-            stringBuilder.Append($"<td>#Of Dependents that are discounted</td>");
+            stringBuilder.Append($"<td>#Of People that are discounted</td>");
             stringBuilder.Append($"<td>{_personHandler.GetNumberPeopleDiscounted(response)}</td>");
             stringBuilder.Append("</tr>");
 
@@ -64,17 +56,7 @@ namespace Paylocity.Handlers
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");
-            stringBuilder.Append("</tr>");
-
-            //stringBuilder.Append($"Report for Employee: {employee.Name}");
-            //stringBuilder.Append("<br/>");
-            //stringBuilder.Append("<br/>");
-            //stringBuilder.Append($"#Of Dependents: {_personHandler.GetNumberOfDependents(response)}"); //-1 since the employee is 
-            //stringBuilder.Append("<br/>");
-            //stringBuilder.Append($"#Of Dependents that are discounted: {_personHandler.GetNumberPeopleDiscounted(response)}");
-            //stringBuilder.Append("<br/>");
-            //stringBuilder.Append($"Annual Cost: {_personHandler.GetAnnualCost(response)}");
-
+            stringBuilder.Append("</tr>");        
 
             stringBuilder.Append("</table>");
             return stringBuilder.ToString();

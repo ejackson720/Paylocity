@@ -10,6 +10,7 @@ namespace Paylocity
             services.AddTransient<IRulesHandler, RulesHandler>();
             services.AddTransient<IDataHandler, DataHandler>();
             services.AddTransient<IPersonHandler, PersonHandler>();
+            services.AddTransient<IHTMLHandler, HTMLHandler>();
 
             
         }

@@ -48,7 +48,7 @@ namespace Paylocity.Handlers
         }
         public int GetNumberOfDependents(EmployeeDependentsResponse response)
         {
-            return response.People.Where(x => x.IsEmployee = false).ToList().Count();
+            return response.People.Where(x => x.IsEmployee == false).ToList().Count();
         }
 
         public double GetAnnualCost(EmployeeDependentsResponse response)

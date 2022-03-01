@@ -14,14 +14,8 @@ namespace Paylocity.Handlers
         }
 
         public EmployeeDependentsResponse ProcessEmployeeDependentsRequest(EmployeeDependentsRequest request)
-        {   
-            if(request == null)
-            {
-                return new EmployeeDependentsResponse()
-                {
-                    HasError = true
-                };
-            }
+        {
+            ValidateRequest(request);
 
             EmployeeDependentsResponse response = new();
 
@@ -34,9 +28,17 @@ namespace Paylocity.Handlers
             }
             response.People.Add(employeePerson);
 
+            //Just in case they typed in a person twice
+            request.Dependents = request.Dependents.Distinct().ToList();
+
             //Create a person for each dependent
-            foreach(var dependent in request.Dependents)
+            foreach (var dependent in request.Dependents)
             {
+                if (dependent == null || dependent.Length == 0)
+                {
+                    continue;
+                }
+                
                 var dependentPerson = _personHandler.GetPerson(dependent, true);
                 if(dependentPerson.Name.Length == 0)
                 {
@@ -48,6 +50,18 @@ namespace Paylocity.Handlers
 
             return response;
          
+        }
+
+        public void ValidateRequest(EmployeeDependentsRequest request)
+        {
+            if (request == null)
+            {
+                throw new Exception("EmployeeDependentsRequest is Null");
+            }
+            if(request.EmployeeName == null || request.EmployeeName.Length == 0)
+            {
+                throw new Exception("Employee Name is Null");
+            }            
         }
 
     }

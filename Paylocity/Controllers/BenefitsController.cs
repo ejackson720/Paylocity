@@ -23,6 +23,7 @@ namespace Paylocity.Controllers
         [HttpGet("{employee}")]
         public string Calculate(EmployeeDependentsRequest employee)
         {
+            string errorMsg = "Error processing this request. <br> If you feel you made a mistake, please reenter the information. <br> Otherwise please contact the IT department";
             try
             {
                 //Get the response
@@ -30,7 +31,7 @@ namespace Paylocity.Controllers
 
                 if (responseObject.HasError)
                 {
-                    return "Error processing this request. <br> If you feel you made a mistake, please reenter the information. <br> Otherwise please contact the IT department";
+                    return errorMsg;
                 }
 
                 //Get the HTML
@@ -39,7 +40,8 @@ namespace Paylocity.Controllers
             }
             catch (Exception ex)
             {
-                return "Error processing this request. <br> If you feel you made a mistake, please reenter the information. <br> Otherwise please contact the IT department";
+                //This is where I would do some kind of alerting or logging (ex) to let the developers know something is wrong, then return a generic message
+                return errorMsg;
 
             }
         }

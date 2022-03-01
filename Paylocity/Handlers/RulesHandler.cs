@@ -18,7 +18,10 @@ namespace Paylocity.Handlers
                 return false;
             }
 
-            if(name[0] == DISCOUNTED_FIRST_LETTER)
+            //the directions said 'A', personally I think it should have been 'A' or 'a' since you are supposed to start names capilized anyway
+            // but I am sticking to the directions given to me, but I would ask the product owner if that is what they intended. 
+            // if 'a' is allowed I would use a to upper on the char
+            if (name[0] == DISCOUNTED_FIRST_LETTER) 
             {
                 return true;
             }
@@ -45,16 +48,21 @@ namespace Paylocity.Handlers
             return Math.Round(PAYCHECK_TOTAL * NUM_OF_PAYCHECK, 2).ToString("N2");
         }
 
-        public string GetPayCheck()
+        public string GetPayCheckString()
         {
             return PAYCHECK_TOTAL.ToString("N2");
         }
 
-        public string GetPaycheckAfterDeductions(double annualDeductions)
+        public double GetPayCheck()
         {
-            var paycheck = ((PAYCHECK_TOTAL * NUM_OF_PAYCHECK) - annualDeductions) / NUM_OF_PAYCHECK;
-
-            return Math.Round(paycheck,2).ToString("N2");            
+            return PAYCHECK_TOTAL;
         }
+
+        public double GetNumPayChecks()
+        {
+            return NUM_OF_PAYCHECK;
+        }
+
+
     }
 }

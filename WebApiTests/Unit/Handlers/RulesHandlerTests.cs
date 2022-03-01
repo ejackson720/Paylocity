@@ -70,5 +70,33 @@ namespace WebApiTests.Unit.Handlers
             //Assert
             Assert.IsFalse(isDiscounted);
         }
+
+
+        [Test]
+        public void GetCostAnnual_EmployeeNotDiscounted_Returns1000()
+        {
+            //Arrange
+            string name = "eric Smith";
+
+            //Act
+            double total = _rulesHandler.GetCostAnnual("Eric Smith", false);
+
+            //Assert
+            Assert.AreEqual(total, 1000);
+        }
+
+        [Test]
+        public void GetCostAnnual_EmployeeDiscounted_Returns950()
+        {
+            //Arrange
+            string name = "eric Smith";
+
+            //Act
+            double total = _rulesHandler.GetCostAnnual("Amy Smith", false);
+
+            //Assert
+            Assert.AreEqual(900, total);
+        }
     }
+    
 }

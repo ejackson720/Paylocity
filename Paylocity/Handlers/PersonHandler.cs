@@ -63,9 +63,42 @@ namespace Paylocity.Handlers
             return response.People.Select(x => x.Cost).Sum();
         }
 
+        //public double GetPaycheckCost(EmployeeDependentsResponse response)
+        //{
+        //    var paycheckCost = response.People.Select(x => x.Cost).Sum();
+        //    if(paycheckCost > 0)
+        //    {
+        //        return paycheckCost / NUM
+        //    }
+        //}
+        //public string GetPaycheckAfterDeductions(EmployeeDependentsResponse response)
+        //{
+        //    var cost = response.People.Select(x => x.Cost).Sum();
+        //    if(cost > 0)
+        //    {
+        //        return Math.Round(cost / 12, 2).ToString("N2"); ;
+        //    }
+        //    throw new Exception("No Cost");
+        //}
+
+        public string GetPaycheckAfterDeductions(EmployeeDependentsResponse response)
+        {
+            double annualDeductions = response.People.Select(x => x.Cost).Sum();
+
+            var paycheck = ((_rulesHandler.GetPayCheck() * _rulesHandler.GetNumPayChecks()) - annualDeductions) / _rulesHandler.GetNumPayChecks();
+
+            return Math.Round(paycheck, 2).ToString("N2");
+            
+        }
+
         public string GetDependentNames(EmployeeDependentsResponse response)
         {
-            return String.Join(",",response.People.Select(x => x.Name));
+            return String.Join(",",response.People.Where(x => x.IsEmployee == false).Select(x => x.Name));
+        }
+
+        public string GetCostPaycheck(EmployeeDependentsResponse response)
+        {
+            return Math.Round(GetAnnualCost(response) / _rulesHandler.GetNumPayChecks()).ToString("N2"); 
         }
     }
 }

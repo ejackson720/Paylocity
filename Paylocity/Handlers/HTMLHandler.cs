@@ -7,12 +7,10 @@ namespace Paylocity.Handlers
     public class HTMLHandler : IHTMLHandler
     {
         private IPersonHandler _personHandler;
-        private IRulesHandler _rulesHandler;
 
-        public HTMLHandler(IPersonHandler personHandler, IRulesHandler rulesHandler)
+        public HTMLHandler(IPersonHandler personHandler)
         {
             _personHandler = personHandler;
-            _rulesHandler = rulesHandler;
         }
 
         public string GetHTML(EmployeeDependentsResponse response)
@@ -51,8 +49,13 @@ namespace Paylocity.Handlers
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");
+            stringBuilder.Append($"<td>Cost of Insurance per Paycheck</td>");
+            stringBuilder.Append($"<td>${_personHandler.GetCostPaycheck(response)}</td>");
+            stringBuilder.Append("</tr>");
+
+            stringBuilder.Append("<tr>");
             stringBuilder.Append($"<td>Paycheck After Deductions</td>");
-            stringBuilder.Append($"<td>${_rulesHandler.GetPaycheckAfterDeductions(_personHandler.GetAnnualCost(response))}</td>");
+            stringBuilder.Append($"<td>${_personHandler.GetPaycheckAfterDeductions(response)}</td>");
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");

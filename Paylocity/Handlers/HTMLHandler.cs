@@ -37,7 +37,7 @@ namespace Paylocity.Handlers
 
             stringBuilder.Append("<tr>");
             stringBuilder.Append($"<td>#Of Dependents</td>");
-            stringBuilder.Append($"<td>{response.GetNumberOfDependents()} :   ({response.GetDependentNames()})</td>");
+            stringBuilder.Append($"<td>{response.GetNumberOfDependents()} :   {response.GetDependentNames()}</td>");
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");

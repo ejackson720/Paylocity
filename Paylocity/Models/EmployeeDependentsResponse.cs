@@ -65,7 +65,12 @@
             {
                 throw new Exception("Invalid People");
             }
-            return String.Join(", ", People.Where(x => x.IsEmployee == false).Select(x => x.Name));
+            var result = String.Join(", ", People.Where(x => x.IsEmployee == false).Select(x => x.Name));
+            if(result.Length == 0)
+            {
+                return string.Empty;
+            }
+            return $"({result})";
         }
 
         public string GetCostPaycheck(double numPayChecksInYear)

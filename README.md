@@ -1,2 +1,6 @@
 # Paylocity
-Run Paylocity first, then start App. Make App.aspx the startup file in App. 
+Created by Eric Jackson
+
+Run Paylocity project first
+Make App.aspx the startup file in App. 
+Start App. 

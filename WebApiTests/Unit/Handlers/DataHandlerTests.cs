@@ -13,6 +13,8 @@ namespace WebApiTests.Unit.Handlers
         IRulesHandler _rulesHandler;
         IPersonHandler _personHandler;
         private DataHandler _dataHandler;
+        private int PAYCHECK_ANNUAL = 2000;
+        private int NUM_OF_PAYCHECK = 26;
 
         [SetUp]
         public void Setup()
@@ -67,7 +69,7 @@ namespace WebApiTests.Unit.Handlers
 
             //Assert
             Assert.IsFalse(employeeDependentsResponse.HasError);
-            Assert.AreEqual(expectedTotal, _personHandler.GetPaycheckAfterDeductions(employeeDependentsResponse));
+            Assert.AreEqual(expectedTotal, employeeDependentsResponse.GetPaycheckAfterDeductions(PAYCHECK_ANNUAL, NUM_OF_PAYCHECK));
 
         }
 

@@ -23,13 +23,13 @@ namespace Paylocity.Controllers
         [HttpGet("{employee}")]
         public string Calculate(EmployeeDependentsRequest employee)
         {
-            string errorMsg = "Error processing this request. <br> If you feel you made a mistake, please reenter the information. <br> Otherwise please contact the IT department";
+            string errorMsg = "Error processing this request. <br> If you feel you made a mistake, please re-enter the information. <br> Otherwise please contact the IT department";
             try
             {
                 //Get the response
                 var responseObject = _dataHandler.ProcessEmployeeDependentsRequest(employee);
 
-                if (responseObject.HasError)
+                if (responseObject == null || responseObject.HasError)
                 {
                     return errorMsg;
                 }

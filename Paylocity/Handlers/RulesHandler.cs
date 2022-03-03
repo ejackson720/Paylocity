@@ -43,9 +43,9 @@ namespace Paylocity.Handlers
             return Math.Round(costAnnual, 2);
         }
 
-        public string GetAnnualPay()
+        public double GetAnnualPay()
         {
-            return Math.Round(PAYCHECK_TOTAL * NUM_OF_PAYCHECK, 2).ToString("N2");
+            return Math.Round(PAYCHECK_TOTAL * NUM_OF_PAYCHECK, 2);
         }
 
         public string GetPayCheckString()
@@ -53,7 +53,7 @@ namespace Paylocity.Handlers
             return PAYCHECK_TOTAL.ToString("N2");
         }
 
-        public double GetPayCheck()
+        public double GetPayCheckAnnual()
         {
             return PAYCHECK_TOTAL;
         }

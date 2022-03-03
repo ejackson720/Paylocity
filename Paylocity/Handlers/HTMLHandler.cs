@@ -7,10 +7,12 @@ namespace Paylocity.Handlers
     public class HTMLHandler : IHTMLHandler
     {
         private IPersonHandler _personHandler;
+        private IRulesHandler _rulesHandler;
 
-        public HTMLHandler(IPersonHandler personHandler)
+        public HTMLHandler(IPersonHandler personHandler, IRulesHandler rulesHandler)
         {
             _personHandler = personHandler;
+            _rulesHandler = rulesHandler;
         }
 
         public string GetHTML(EmployeeDependentsResponse response)
@@ -35,27 +37,27 @@ namespace Paylocity.Handlers
 
             stringBuilder.Append("<tr>");
             stringBuilder.Append($"<td>#Of Dependents</td>");
-            stringBuilder.Append($"<td>{_personHandler.GetNumberOfDependents(response)} :   {_personHandler.GetDependentNames(response)}</td>");
+            stringBuilder.Append($"<td>{response.GetNumberOfDependents()} :   ({response.GetDependentNames()})</td>");
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");
             stringBuilder.Append($"<td>#Of People that are discounted</td>");
-            stringBuilder.Append($"<td>{_personHandler.GetNumberPeopleDiscounted(response)}</td>");
+            stringBuilder.Append($"<td>{response.GetNumberPeopleDiscounted()}</td>");
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");
             stringBuilder.Append($"<td>Annual Cost of Insurance</td>");
-            stringBuilder.Append($"<td>${_personHandler.GetAnnualCost(response)}</td>");
+            stringBuilder.Append($"<td>${response.GetAnnualCostSTring()}</td>");
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");
             stringBuilder.Append($"<td>Cost of Insurance per Paycheck</td>");
-            stringBuilder.Append($"<td>${_personHandler.GetCostPaycheck(response)}</td>");
+            stringBuilder.Append($"<td>${response.GetCostPaycheck(_rulesHandler.GetNumPayChecks())}</td>");
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");
             stringBuilder.Append($"<td>Paycheck After Deductions</td>");
-            stringBuilder.Append($"<td>${_personHandler.GetPaycheckAfterDeductions(response)}</td>");
+            stringBuilder.Append($"<td>${response.GetPaycheckAfterDeductions(_rulesHandler.GetAnnualPay(), _rulesHandler.GetNumPayChecks())}</td>");
             stringBuilder.Append("</tr>");
 
             stringBuilder.Append("<tr>");

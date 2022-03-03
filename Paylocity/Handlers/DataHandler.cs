@@ -20,7 +20,7 @@ namespace Paylocity.Handlers
             EmployeeDependentsResponse response = new();
 
             //Create a person for the employee
-            var employeePerson= _personHandler.GetPerson(request.EmployeeName, false);
+            var employeePerson = _personHandler.GetPerson(request.EmployeeName, false);
             if(employeePerson.Name.Length == 0)
             {
                 response.HasError = true;
@@ -48,8 +48,7 @@ namespace Paylocity.Handlers
                 response.People.Add(dependentPerson);
             }
 
-            return response;
-         
+            return response;         
         }
 
         public void ValidateRequest(EmployeeDependentsRequest request)
@@ -58,10 +57,16 @@ namespace Paylocity.Handlers
             {
                 throw new Exception("EmployeeDependentsRequest is Null");
             }
+            
             if(request.EmployeeName == null || request.EmployeeName.Length == 0)
             {
                 throw new Exception("Employee Name is Null");
-            }            
+            }
+            
+            if(request.Dependents == null)
+            {
+                request.Dependents = new List<string>();
+            }
         }
 
     }

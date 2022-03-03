@@ -5,7 +5,7 @@ namespace Paylocity.Handlers
 {
     public class PersonHandler : IPersonHandler
     {
-        IRulesHandler _rulesHandler;
+        readonly IRulesHandler _rulesHandler;
         public PersonHandler(IRulesHandler rulesHandler)
         {
             _rulesHandler = rulesHandler;
@@ -22,7 +22,7 @@ namespace Paylocity.Handlers
             {
                 Name = name,
                 Cost = _rulesHandler.GetCostAnnual(name, isDependent),
-                IsDiscounted = _rulesHandler.IsDiscounted(name)  ,
+                IsDiscounted = _rulesHandler.IsDiscounted(name),
                 IsEmployee = !isDependent
             };                
 
@@ -31,74 +31,17 @@ namespace Paylocity.Handlers
 
         public Person GetEmployee(EmployeeDependentsResponse response)
         {
-            if (response == null )
+            if (response == null)
             {
-                throw new Exception("Invalid Response");
+                throw new Exception("Invalid response in GetEmployee");
             }
 
-            var employee  = response.People.Where(x => x.IsEmployee == true).FirstOrDefault();
+            var employee = response.People.Where(x => x.IsEmployee == true).FirstOrDefault();
             if(employee == null)
             {
-                throw new Exception("No Employee");
+                throw new Exception("No Employee in dependents");
             }
             return employee;
-        }
-
-        public int GetNumberPeopleDiscounted(EmployeeDependentsResponse response)
-        {
-            return response.People.Where(x=>x.IsDiscounted == true).ToList().Count();
-        }
-
-        public int GetNumberDependentsDiscounted(EmployeeDependentsResponse response)
-        {
-            return response.People.Where(x => x.IsDiscounted == true && x.IsEmployee == false).ToList().Count();
-        }
-        public int GetNumberOfDependents(EmployeeDependentsResponse response)
-        {
-            return response.People.Where(x => x.IsEmployee == false).ToList().Count();
-        }
-
-        public double GetAnnualCost(EmployeeDependentsResponse response)
-        {
-            return response.People.Select(x => x.Cost).Sum();
-        }
-
-        //public double GetPaycheckCost(EmployeeDependentsResponse response)
-        //{
-        //    var paycheckCost = response.People.Select(x => x.Cost).Sum();
-        //    if(paycheckCost > 0)
-        //    {
-        //        return paycheckCost / NUM
-        //    }
-        //}
-        //public string GetPaycheckAfterDeductions(EmployeeDependentsResponse response)
-        //{
-        //    var cost = response.People.Select(x => x.Cost).Sum();
-        //    if(cost > 0)
-        //    {
-        //        return Math.Round(cost / 12, 2).ToString("N2"); ;
-        //    }
-        //    throw new Exception("No Cost");
-        //}
-
-        public string GetPaycheckAfterDeductions(EmployeeDependentsResponse response)
-        {
-            double annualDeductions = response.People.Select(x => x.Cost).Sum();
-
-            var paycheck = ((_rulesHandler.GetPayCheck() * _rulesHandler.GetNumPayChecks()) - annualDeductions) / _rulesHandler.GetNumPayChecks();
-
-            return Math.Round(paycheck, 2).ToString("N2");
-            
-        }
-
-        public string GetDependentNames(EmployeeDependentsResponse response)
-        {
-            return String.Join(",",response.People.Where(x => x.IsEmployee == false).Select(x => x.Name));
-        }
-
-        public string GetCostPaycheck(EmployeeDependentsResponse response)
-        {
-            return Math.Round(GetAnnualCost(response) / _rulesHandler.GetNumPayChecks()).ToString("N2"); 
-        }
+        }                
     }
 }
